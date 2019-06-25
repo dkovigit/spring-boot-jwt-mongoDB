@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.app.model.Role;
 import com.app.model.User;
+import com.app.security.LocalUserDetailService;
 import com.app.service.UserService;
 
 import springfox.documentation.swagger2.mappers.ModelMapper;
@@ -34,21 +35,19 @@ public class StudentAppApplication implements org.springframework.boot.CommandLi
 
 	@Override
 	public void run(String... params) throws Exception {
-		User admin = new User();
-		admin.setUsername("admin");
-		admin.setPassword("admin");
-		admin.setEmail("test1@email.com");
-		//admin.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_ADMIN)));
-
-		userService.signup(admin);
-
-		User client = new User();
-		client.setUsername("client");
-		client.setPassword("client");
-		client.setEmail("test2@email.com");
-		//client.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_CLIENT)));
-
-		userService.signup(client);
+		/*
+		 * User admin = new User(); admin.setUsername("admin");
+		 * admin.setPassword("admin"); admin.setEmail("test1@email.com");
+		 * admin.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_ADMIN)));
+		 * 
+		 * userService.signup(admin);
+		 * 
+		 * User client = new User(); client.setUsername("client");
+		 * client.setPassword("client"); client.setEmail("test2@email.com");
+		 * client.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_CLIENT)));
+		 * 
+		 * userService.signup(client);
+		 */
 	}
 
 }
