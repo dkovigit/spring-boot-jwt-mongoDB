@@ -63,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/configuration/**")//
         .antMatchers("/search")
         .antMatchers("/progress")
+        .antMatchers("/progress/**")
         
         .and()
         .ignoring()
