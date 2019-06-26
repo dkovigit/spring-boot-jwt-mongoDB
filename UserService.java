@@ -1,8 +1,6 @@
 package com.app.service;
 
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.exception.CustomException;
-import com.app.model.Role;
 import com.app.model.User;
 import com.app.repository.UserRepository;
 import com.app.security.JwtTokenProvider;
@@ -38,24 +35,19 @@ public class UserService {
   public String signin(String username, String password) {
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-      //return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getRoles());
-      return jwtTokenProvider.createToken(username, Arrays.asList(Role.ROLE_CLIENT));
+      return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getRoles());
     } catch (AuthenticationException e) {
       throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
 
-  public String signup(User user) {	  
+  public String signup(User user) {
     if (!userRepository.existsByUsername(user.getUsername())) {
-      //user.setPassword(passwordEncoder.encode(user.getPassword()));
-      user.setPassword(user.getPassword());
-     
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
-      //return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
-      return jwtTokenProvider.createToken(user.getUsername(), Arrays.asList(Role.ROLE_CLIENT));
+      return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
     } else {
-      //throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
-    	return jwtTokenProvider.createToken(user.getUsername(), Arrays.asList(Role.ROLE_CLIENT));
+      throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
 
@@ -76,8 +68,7 @@ public class UserService {
   }
 
   public String refresh(String username) {
-    //return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getRoles());
-    return jwtTokenProvider.createToken(username, , Arrays.asList(Role.ROLE_CLIENT));
+    return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getRoles());
   }
 
 }

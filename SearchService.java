@@ -16,8 +16,6 @@ public class SearchService {
 	 @Autowired
 	  private SearchRepository searchRepository;
 
-	
-
 	  public void saveSearch(SearchDTO searchDto) {
 	    try {
 	    	ModelMapper modelMapper = new ModelMapper();	    	

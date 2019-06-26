@@ -22,8 +22,8 @@ public class User {
 	private String password;
 	private String fullname;
 	private boolean enabled;
-//	@DBRef
-//	private List<Role> roles;
+	@DBRef
+	private List<Role> roles;
 	public String getId() {
 		return id;
 	}
@@ -61,12 +61,12 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	/*public List<Role> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
-	}*/
+	}
 	
 }
 
